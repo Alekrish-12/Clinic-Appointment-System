@@ -1,0 +1,49 @@
+{
+    "users": [
+      {
+        "id": 1,
+        "firstName": "John",
+        "lastName": "Doe",
+        "gender": "Male",
+        "dateOfBirth": "1990-05-15",
+        "address": "123 Main St, Cityville",
+        "contactNumber": "123-456-7890",
+        "email": "john.doe@example.com",
+        "password": "hashedPassword123"
+      },
+      {
+        "id": 2,
+        "firstName": "Jane",
+        "lastName": "Smith",
+        "gender": "Female",
+        "dateOfBirth": "1985-08-20",
+        "address": "456 Oak Ave, Townsville",
+        "contactNumber": "987-654-3210",
+        "email": "jane.smith@example.com",
+        "password": "hashedPassword456"
+      },
+      {
+        "id": 3,
+        "firstName": "Alekhya",
+        "lastName": "Krishna",
+        "gender": "Female",
+        "dateOfBirth": "2000-02-05",
+        "address": "145 Jublie, Hyderabad",
+        "contactNumber": "123-456-7890",
+        "email": "alekhya.krish@example.com",
+        "password": "krishnaPassword028"
+      },
+      {
+        "id": 4,
+        "firstName": "Amith",
+        "lastName": "Dev",
+        "gender": "Male",
+        "dateOfBirth": "1986-04-25",
+        "address": "292 White house, Bangalore",
+        "contactNumber": "193-979-2948",
+        "email": "amith.dev@example.com",
+        "password": "amithPassword283"
+      }
+    ]
+  }
+  

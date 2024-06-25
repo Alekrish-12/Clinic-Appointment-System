@@ -1,0 +1,33 @@
+{
+    "appointments": [
+      {
+        "id": 1,
+        "appointmentDate": "2024-07-05",
+        "time": "10:00 AM",
+        "doctorName": "Dr. Smith",
+        "purposeOfVisit": "Routine checkup"
+      },
+      {
+        "id": 2,
+        "appointmentDate": "2024-07-10",
+        "time": "2:30 PM",
+        "doctorName": "Dr. Johnson",
+        "purposeOfVisit": "MRI Scan"
+      },
+      {
+        "id": 3,
+        "appointmentDate": "2024-06-05",
+        "time": "10:00 AM",
+        "doctorName": "Dr. Alekhya",
+        "purposeOfVisit": "Blood Test"
+      },
+      {
+        "id": 4,
+        "appointmentDate": "2024-07-20",
+        "time": "2:30 PM",
+        "doctorName": "Dr. Amith",
+        "purposeOfVisit": "X-RAy"
+      }
+    ]
+  }
+  
