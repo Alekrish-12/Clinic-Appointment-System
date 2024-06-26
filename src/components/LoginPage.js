@@ -8,7 +8,7 @@ const LoginPage = () => {
 
   const handleLogin = async () => {
     try {
-      const response = await fetch('http://localhost:3001/users');
+      const response = await fetch('http://localhost:4000/users');
       const data = await response.json();
       const user = data.find(u => u.email === email && u.password === password);
 
