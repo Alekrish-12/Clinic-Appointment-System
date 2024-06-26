@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { login } from '../services/authService';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -7,18 +8,11 @@ const LoginPage = () => {
   const navigate = useNavigate();
 
   const handleLogin = async () => {
-    try {
-      const response = await fetch('http://localhost:4000/users');
-      const data = await response.json();
-      const user = data.find(u => u.email === email && u.password === password);
-
-      if (user) {
-        navigate('/home');
-      } else {
-        alert('Invalid credentials');
-      }
-    } catch (error) {
-      console.error('Error during login:', error);
+    const user = await login(email, password);
+    if (user) {
+      navigate('/home');
+    } else {
+      alert('Invalid credentials');
     }
   };
 
