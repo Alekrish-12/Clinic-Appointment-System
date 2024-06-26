@@ -1,51 +1,29 @@
-const login = async (email, password) => {
+// src/services/authService.js
+
+const BASE_URL = 'http://localhost:3001/users';
+
+export const login = async (email, password) => {
   try {
-    const response = await fetch('/api/auth/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ email, password }),
-    });
-
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.message || 'Invalid username or password');
-    }
-
-    const userData = await response.json();
-    return userData;
+    const response = await fetch(BASE_URL);
+    const users = await response.json();
+    const user = users.find(user => user.email === email && user.password === password);
+    return user ? user : null;
   } catch (error) {
-    throw new Error(error.message);
+    console.error('Error during login:', error);
+    return null;
   }
 };
 
-const signup = async (userData) => {
+export const signup = async (userData) => {
   try {
-    const response = await fetch('/api/auth/signup', {
+    const response = await fetch(BASE_URL, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(userData),
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ...userData, password: 'Change@123' })
     });
-
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.message || 'Error signing up');
-    }
-
-    const signupData = await response.json();
-    return signupData;
+    return response.ok;
   } catch (error) {
-    throw new Error(error.message);
+    console.error('Error during signup:', error);
+    return false;
   }
 };
-
-// Assign the object to a variable before exporting
-const authService = {
-  login,
-  signup,
-};
-
-export default authService;
