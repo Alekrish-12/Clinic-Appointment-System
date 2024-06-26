@@ -15,7 +15,7 @@ const BookAppointmentPage = () => {
 
   const handleBookAppointment = async () => {
     try {
-      await fetch('http://localhost:3002/appointments', {
+      await fetch('http://localhost:4001/appointments', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...appointmentData })
