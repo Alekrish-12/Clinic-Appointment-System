@@ -20,7 +20,7 @@ const SignupPopup = () => {
 
   const handleSignup = async () => {
     try {
-      await fetch('http://localhost:3001/users', {
+      await fetch('http://localhost:4000/users', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...formData, password: 'Change@123' })
