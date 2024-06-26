@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { bookAppointment } from '../services/appointmentService';
 
 const BookAppointmentPage = () => {
   const [appointmentData, setAppointmentData] = useState({
@@ -14,15 +15,11 @@ const BookAppointmentPage = () => {
   };
 
   const handleBookAppointment = async () => {
-    try {
-      await fetch('http://localhost:4001/appointments', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...appointmentData })
-      });
+    const success = await bookAppointment(appointmentData);
+    if (success) {
       alert('Appointment booked successfully!');
-    } catch (error) {
-      console.error('Error booking appointment:', error);
+    } else {
+      alert('Failed to book appointment');
     }
   };
 
