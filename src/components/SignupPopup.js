@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { signup } from '../services/authService';
 
 const SignupPopup = () => {
   const [formData, setFormData] = useState({
@@ -19,16 +20,12 @@ const SignupPopup = () => {
   };
 
   const handleSignup = async () => {
-    try {
-      await fetch('http://localhost:4000/users', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...formData, password: 'Change@123' })
-      });
+    const success = await signup(formData);
+    if (success) {
       alert('Signup successful! Check your email for login details.');
       navigate('/');
-    } catch (error) {
-      console.error('Error during signup:', error);
+    } else {
+      alert('Signup failed');
     }
   };
 
