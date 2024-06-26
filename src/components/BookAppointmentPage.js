@@ -1,93 +1,43 @@
 import React, { useState } from 'react';
-import appointmentService from '../services/appointmentService';
 
 const BookAppointmentPage = () => {
-  const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    gender: '',
-    dob: '',
-    age: '',
+  const [appointmentData, setAppointmentData] = useState({
     appointmentDate: '',
     time: '',
     doctorName: '',
-    purposeOfVisit: '',
+    purposeOfVisit: ''
   });
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+  const handleChange = e => {
+    const { name, value } = e.target;
+    setAppointmentData(prevState => ({ ...prevState, [name]: value }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleBookAppointment = async () => {
     try {
-      await appointmentService.bookAppointment(formData);
-      setSuccess('Appointment booked successfully!');
-      setError('');
-    } catch (err) {
-      setError(err.message);
-      setSuccess('');
+      await fetch('http://localhost:3002/appointments', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...appointmentData })
+      });
+      alert('Appointment booked successfully!');
+    } catch (error) {
+      console.error('Error booking appointment:', error);
     }
   };
 
   return (
     <div>
       <h2>Book Appointment</h2>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      {success && <p style={{ color: 'green' }}>{success}</p>}
-      <form onSubmit={handleSubmit}>
-        <label>
-          First Name:
-          <input type="text" name="firstName" value={formData.firstName} onChange={handleChange} required />
-        </label>
-        <label>
-          Last Name:
-          <input type="text" name="lastName" value={formData.lastName} onChange={handleChange} required />
-        </label>
-        <label>
-          Gender:
-          <select name="gender" value={formData.gender} onChange={handleChange} required>
-            <option value="">Select</option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-            <option value="other">Other</option>
-          </select>
-        </label>
-        <label>
-          Date of Birth:
-          <input type="date" name="dob" value={formData.dob} onChange={handleChange} />
-        </label>
-        <label>
-          Age:
-          <input type="text" name="age" value={formData.age} onChange={handleChange} required />
-        </label>
-        <label>
-          Appointment Date:
-          <input type="date" name="appointmentDate" value={formData.appointmentDate} onChange={handleChange} required />
-        </label>
-        <label>
-          Time:
-          <input type="time" name="time" value={formData.time} onChange={handleChange} required />
-        </label>
-        <label>
-          Doctor Name:
-          <select name="doctorName" value={formData.doctorName} onChange={handleChange} required>
-            <option value="">Select</option>
-            <option value="Doctor 1">Doctor 1</option>
-            <option value="Doctor 2">Doctor 2</option>
-          </select>
-        </label>
-        <label>
-          Purpose of Visit:
-          <textarea name="purposeOfVisit" value={formData.purposeOfVisit} onChange={handleChange} required />
-        </label>
-        <button type="submit">Book Appointment</button>
-      </form>
+      <input type="date" name="appointmentDate" onChange={handleChange} />
+      <input type="time" name="time" onChange={handleChange} />
+      <select name="doctorName" onChange={handleChange}>
+        <option value="">Select Doctor</option>
+        <option value="Doctor 1">Doctor 1</option>
+        <option value="Doctor 2">Doctor 2</option>
+      </select>
+      <input type="text" name="purposeOfVisit" placeholder="Purpose of Visit" onChange={handleChange} />
+      <button onClick={handleBookAppointment}>Book Appointment</button>
     </div>
   );
 };
