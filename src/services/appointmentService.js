@@ -1,6 +1,6 @@
 // src/services/appointmentService.js
 
-const BASE_URL = 'http://localhost:3002/appointments';
+const BASE_URL = 'http://localhost:4001/appointments';
 
 export const fetchAppointments = async () => {
   try {
