@@ -1,6 +1,6 @@
 // src/services/authService.js
 
-const BASE_URL = 'http://localhost:3001/users';
+const BASE_URL = 'http://localhost:4000/users';
 
 export const login = async (email, password) => {
   try {
