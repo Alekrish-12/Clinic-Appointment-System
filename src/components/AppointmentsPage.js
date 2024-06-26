@@ -6,7 +6,7 @@ const AppointmentsPage = () => {
   useEffect(() => {
     const fetchAppointments = async () => {
       try {
-        const response = await fetch('http://localhost:3002/appointments');
+        const response = await fetch('http://localhost:4001/appointments');
         const data = await response.json();
         setAppointments(data);
       } catch (error) {
