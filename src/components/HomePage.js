@@ -1,17 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import appointmentService from '../services/appointmentService';
+import React, { useState, useEffect } from 'react';
 
 const HomePage = () => {
-  const [appointments, setAppointments] = useState([]);
-  const [error, setError] = useState(null);
+  const [bookings, setBookings] = useState(0);
+  const [nextBooking, setNextBooking] = useState(null);
 
   useEffect(() => {
     const fetchAppointments = async () => {
       try {
-        const data = await appointmentService.getAppointments();
-        setAppointments(data);
+        const response = await fetch('http://localhost:3002/appointments');
+        const data = await response.json();
+        setBookings(data.length);
+        if (data.length > 0) {
+          setNextBooking(data[0].appointmentDate);
+        }
       } catch (error) {
-        setError(error.message);
+        console.error('Error fetching appointments:', error);
       }
     };
     fetchAppointments();
@@ -19,15 +22,9 @@ const HomePage = () => {
 
   return (
     <div>
-      <h2>My Appointments</h2>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      <ul>
-        {appointments.map((appointment) => (
-          <li key={appointment.id}>
-            {appointment.date} - {appointment.time} with {appointment.doctorName}
-          </li>
-        ))}
-      </ul>
+      <h2>Home</h2>
+      <p>Total number of Bookings: {bookings}</p>
+      {nextBooking && <p>Next Booking Date: {nextBooking}</p>}
     </div>
   );
 };
