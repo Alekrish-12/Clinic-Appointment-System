@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from 'react';
+import { fetchAppointments } from '../services/appointmentService';
 
 const AppointmentsPage = () => {
   const [appointments, setAppointments] = useState([]);
 
   useEffect(() => {
-    const fetchAppointments = async () => {
+    const getAppointments = async () => {
       try {
-        const response = await fetch('http://localhost:4001/appointments');
-        const data = await response.json();
-        setAppointments(data);
+        const fetchedAppointments = await fetchAppointments();
+        setAppointments(fetchedAppointments);
       } catch (error) {
         console.error('Error fetching appointments:', error);
       }
     };
-    fetchAppointments();
+
+    getAppointments();
   }, []);
 
   return (
